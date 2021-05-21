@@ -35,7 +35,7 @@ For further detail of features and implementation, please refer the summary belo
 
 ### Implementation Features
 
-* [Structure] <Viewer> <=> <Controller> <=> <Service> <=> <DAO> <=> <Hibernate> <=> <MySQL on AWS RDS>
+* [Structure] Viewer <=> Controller <=> Service <=> DAO <=> Hibernate <=> MySQL on AWS RDS
 
 * [Security_Privilege_Hierarchy] Protected password data by bcrypt and strictly layerized privilege hierarchy by Spring Security.
 
@@ -59,50 +59,5 @@ For further detail of features and implementation, please refer the summary belo
 
 
 
-### Website Map
+### DataBase Scheme
 ![image](../ppholic_server_demo/src/main/resources/static/images/SQL_Scheme.png)
-
-
-
-### Website Map
-
--- Home --  Member Register
-        |
-        --  Product Center  --  Product Page
-        |
-        --  Member Center   --  Shopping Cart
-                            |
-                            --  Shopping Record
-                            |
-                            --  User Center     --  Product Management System
-                                                |
-                                                --  Member Management System
-                                                |
-                                                --  Manager Management Area     --  User Management System
-                                                |
-                                                --  System Management Area
-
-
-
-### Management Privilege Summary
-
-                Member          Member                      Member          Product
-                Information     Shopping Cart/Record        Privilege       Information
-                C/R/U/D         C/R/U/D                     C/R/U/D         C/R/U/D
-------------------------------------------------------------------------------------------------------------------------
-1. Member       O/O/O/O         N/O/O/X                     N/O/X/X         X/O/X/X
-2. Employee     O/O/O/O         N/O/O/O                     N/O/O/O         O/O/O/O
-3. Manager      O/O/O/O         N/O/O/O                     N/O/O/O         O/O/O/O
-4. Admin        O/O/O/O         N/O/O/O                     N/O/O/O         O/O/O/O
-5. Others       O/X/X/X         N/X/X/X                     N/X/X/X         X/O/X/X
-
-
-                User            User                        User
-                Information     Shopping Cart/Record        Privilege
-                C/R/U/D         C/R/U/D                     C/R/U/D
-------------------------------------------------------------------------------------------------------------------------
-1. Member       X/X/X/X         N/X/X/X                     N/X/X/X
-2. Employee     X/O/O/O         N/O/O/X                     N/O/X/X
-3. Manager      O/O/O/O         O/O/O/O                     N/O/O/O
-4. Admin        O/O/O/O         O/O/O/O                     N/O/O/O
-5. Others       X/X/X/X         N/X/X/X                     N/X/X/X
