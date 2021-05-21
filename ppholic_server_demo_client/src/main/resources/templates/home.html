@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html xlmns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>PPHOLIC・Travel</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+            rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+            crossorigin="anonymous" />
+</head>
+
+<body>
+    <!-- Top bar with title, search and member shortcut -->
+    <div class="d-flex page-header bg-dark bg-gradient">
+        <div class="flex-fill text-start"></div>
+
+        <div class="flex-grow-1 text-end">
+            <a th:href="@{/showLoginPage}" th:if="${session.theUser == null}" 
+                    class="btn btn-primary col-2">Login</a>
+                
+            <a th:href="@{/register/showMemberRegisterForm}" th:if="${session.theUser == null}"
+                class="btn btn-primary col-2">Sign On</a>
+
+            <form action="#" th:if="${session.theUser != null}" th:action="@{/logout}" method="POST">
+                <a th:href="@{/member/center}" class="btn btn-primary col-2">Profile</a>
+
+                <button type="submit" class="btn btn-danger col-2">Log out</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class ="container">
+        <div id="content">
+            <div id="header" style="text-align:center">
+                <p class="fs-1 fw-bold text-dark">PPHOLIC・Travel Agency</p>
+            </div>
+            <br>
+            <!-- Search Box and Check All -->
+            <div class="text-center">
+                <form action="#" th:action="@{/product/search}" method="GET">
+                    <label class="form-inline col-6">
+                        <input type="text" placeholder="Where do yo want to go today?" name="searchName"
+                                class="form-control" />
+                    </label>
+                    
+                    <input type="submit" class="btn btn-primary col-1" value="Search" />
+
+                    <a th:href="@{/product/center}" class="btn btn-success col-1">Check all</a>
+                </form>
+            </div>
+            <br>
+            <br>
+            <!-- show top 5 hot product -->
+            <h3 class="text-body">Hot Spot Today</h3>
+            <hr class="text-dark">
+            <p>
+                <table class = "table table-bordered table-striped">
+                    <thead >
+                        <tr class = "table-dark text-center">
+                            <th><body class="text-light">Sub Category</body></th>
+                            <th><body class="text-light">Product Name</body></th>
+                            <th><body class="text-light">Price</body></th>
+                            <th><body class="text-light">Information</body></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="tempProduct,iterStat :${products}" th:if="${iterStat.index} lt 5">
+                            <td th:text = "${tempProduct.subCategory.name}" class = "text-center"></td>
+                            <td class = "text-center">
+                                <a th:href="@{/product/page (productId=${tempProduct.id})}"
+                                    th:text = "${tempProduct.name}"></a>
+                            </td>
+                            <td th:text = "${#numbers.formatInteger(tempProduct.price,3,'COMMA')}" class = "text-center">
+                            <td th:text = "${tempProduct.information}">
+                        </tr>
+                    </tbody>
+                </table>    
+            </p>
+            <br>
+            <br>
+            <hr class="text-dark">
+            <!-- Information for demo server -->
+            <p>
+                <a th:href="@{/website-introduction}" th:text = "'Website Introduction'" class="btn btn-primary col-2"></a>
+
+                <a th:href="@{/rest-api-introduction}" th:text = "'RESTful API Introduction'" class="btn btn-primary col-2"></a>
+
+                <a th:href="@{/introduction}" th:text = "'Source Code (TBD)'" class="btn btn-primary col-2"></a>
+
+                <a th:href="@{http://travel.ppholic.tw}" th:text = "'Original Server Site'" class="btn btn-primary col-2"></a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

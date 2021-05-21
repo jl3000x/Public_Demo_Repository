@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html xlmns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PPHOLIC・Travel</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+            rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+            crossorigin="anonymous" />
+</head>
+
+<body>
+    <!-- Top bar with title, search and member shortcut -->
+    <div class="d-flex justify-content-between align-items-center page-header bg-dark bg-gradient">
+        <div class="flex-fill text-start">
+            <h1><a th:href="@{/}" class="link-light text-white" style="margin-left: 5px">PPHOLIC</a></h1>
+        </div>
+        
+        <div class="flex-grow-1 text-center">
+            <form action="#" th:action="@{/product/search}" method="GET">
+                <label class="form-inline col-8">
+                    <input type="text" placeholder="Where do yo want to go today?" name="searchName"
+                            class="form-control" />
+                </label>
+                <input type="submit" class="btn btn-info col-2" value="Search" />
+            </form>
+        </div>
+        
+        <div class="flex-grow-1 text-end">
+            <a th:href="@{/showLoginPage}" th:if="${session.user == null}" 
+                    class="btn btn-primary col-3">Login</a>
+                
+            <a th:href="@{/register/showMemberRegisterForm}" th:if="${session.user == null}"
+                class="btn btn-primary col-3">Sign On</a>
+
+            <form action="#" sec:authorize="hasRole('MEMBER')" th:action="@{/logout}" method="POST">
+                <a th:href="@{/member/center}" class="btn btn-primary col-3 ">Profile </a>
+
+                <button type="submit" class="btn btn-danger col-3 ">Log out</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class ="container">
+        <div id="content">
+            <p>
+                <h2 th:text = "${product.name}"></h2>
+            </p>
+            <hr>
+            <br>
+            <p>
+                <table class = "table table-bordered table-striped">
+                    <thead >
+                        <tr class = "table-dark text-center">
+                            <th>Sub Category</th>
+                            <th class="text-light">Price</th>
+                            <th class="text-light">Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="align-middle">
+                            <td th:text = "${product.subCategory.name}" class = "text-center"></td>
+                            <td th:text = "${#numbers.formatInteger(product.price,3,'COMMA')}" class = "text-center">
+                            <td th:text = "${product.information}">
+                        </tr>
+                    </tbody>
+                </table>    
+            </p>
+            <p>
+                <form action="#" th:action="@{/member/shoppinglist/addProduct}" method="GET">
+                    <label class="form-inline col-1">
+                        <input type="number" placeholder="Amount" name="amount"
+                                class="form-control" min="1" max="10" required/>
+                    </label>
+                    <input type="hidden" name="theProductID" th:value="${product.id}" />
+                    <input type="submit" class="btn btn-info col-1" value="Add to Cart" />
+                </form>
+            </p>
+            <!-- Employee only management panel -->
+            <div sec:authorize="hasRole('ROLE_EMPLOYEE')" 
+                class="container container-fluid border border-primary p-3 rounded"
+                style="margin: 0 auto;">
+                <p>
+                    <h3>Employee Management Panel</h3>
+                    <hr>
+                    <p>
+                        <a th:href="@{/product/management/show (searchName=${product.name})}" class="btn btn-primary col-3">Update Product</a>
+                        <a th:href="@{/product/management/list}" class="btn btn-primary col-3">Product Management System</a>
+                    </p>
+                    <p>
+                        <a sec:authorize="hasRole('ROLE_EMPLOYEE')" th:href="@{/user/management/list}"
+                        class="btn btn-primary col-3">
+                            User Management System
+                        </a>
+
+                        <a th:href="@{/member/management/list}"class="btn btn-primary col-3">
+                            Member Management System
+                        </a>
+                    </p>
+                </p>
+            </div>
+            <br>
+            <br>
+            <hr>
+            <p>
+                <a th:href="@{/member/shoppinglist/center}" class="btn btn-primary col-2"> Check the Cart </a>
+
+                <a th:href="@{/product/center}" class="btn btn-primary col-2"> Check More Products </a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html xlmns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Shopping Cart</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+            rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+            crossorigin="anonymous" />
+</head>
+
+<body>
+    <!-- Top bar with title, search and member shortcut -->
+    <div class="d-flex align-items-center page-header bg-dark bg-gradient">
+        <div class="flex-fill text-start">
+            <h1><a th:href="@{/}" class="link-light text-white" style="margin-left: 5px">PPHOLIC</a></h1>
+        </div>
+        
+        <div class="flex-grow-1 text-center">
+            <form action="#" th:action="@{/product/search}" method="GET">
+                <label class="form-inline col-8">
+                    <input type="text" placeholder="Where do yo want to go today?" name="searchName"
+                            class="form-control" />
+                </label>
+                <input type="submit" class="btn btn-info col-2" value="Search" />
+            </form>
+        </div>
+        
+        <div class="flex-grow-1 text-end">
+            <a th:href="@{/showLoginPage}" th:if="${session.theUser == null}" 
+                    class="btn btn-primary col-3">Login</a>
+                
+            <a th:href="@{/register/showMemberRegisterForm}" th:if="${session.theUser == null}"
+                class="btn btn-primary col-3">Sign On</a>
+
+            <form action="#" th:if="${session.theUser != null}"th:action="@{/logout}" method="POST">
+                <a th:href="@{/member/center}" class="btn btn-primary col-3 ">Profile </a>
+
+                <button type="submit" class="btn btn-danger col-3 ">Log out</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class ="container">
+        <div id="content">
+            <p>
+                <h2>Shopping Cart</h2>
+            </p>
+            <hr>
+            <br>
+            <p>
+                <table class = "table table-bordered table-striped">
+                    <thead >
+                        <tr class = "table-dark text-center">
+                            <th>Sub Category</th>
+                            <th>Product Name</th>
+                            <th>Information</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="tempSubtotal : ${theShoppingList.subtotals}">
+                            <td th:text = "${tempSubtotal.product.subCategory.name}" class = "text-center">
+                            <td class = "text-center">
+                                <a th:href="@{/product/page (productId=${tempSubtotal.product.id})}"
+                                th:text = "${tempSubtotal.product.name}"></a>
+                            </td>
+                            <td th:text = "${tempSubtotal.product.information}">
+                            <td th:text = "${#numbers.formatInteger(tempSubtotal.product.price,3,'COMMA')}" class = "text-center"></td>
+                            <td th:text = "${tempSubtotal.amount}" class = "text-center"></td>
+                            <td class = "text-center">
+                                <a th:href="@{/member/shoppinglist/discardProduct (shoppinglistId=${theShoppingList.id}, subtotalId=${tempSubtotal.id}, userName=${userName})}"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="if (!(confirm('Confirm to delete this item?'))) return false">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </p>
+            <p>
+                <a th:href="@{/product/center}" class="btn btn-primary col-2">Check More Products</a>
+            </p>
+            <br>
+            <br>
+            <p>
+                <hr>
+                <p>
+                    <div>
+                        <h4>Total: <span th:text="${theShoppingList.total}"></span></h4>
+                    </div>
+                </p>
+                <br>
+                <p>
+                    <a th:href="@{/member/shoppinglist/pay (shoppinglistId=${theShoppingList.id}, userName=${userName})}"
+                        class="btn btn-success col-2"
+                        onclick="return confirmToPay();">
+                        Confirm to Pay
+                    </a> 
+
+                    <a th:href="@{/member/shoppinglist/clear (shoppinglistId=${theShoppingList.id}, userName=${userName})}"
+                        class="btn btn-danger col-2"
+                        onclick="if (!(confirm('Confirm to clean the cart?'))) return false">
+                        Clear the Cart
+                    </a>
+                </p>
+            </p>
+            <br>
+        </div>
+    </div>
+</body>
+
+<script>
+    function confirmToPay() {
+        if ('[(${theShoppingList.total})]' > 0){
+            if (!(confirm('Confirm to pay?'))){
+                return false;
+            }
+        }
+        else{
+            alert('Please select more products for further payment.');
+            return false;
+        }
+    }
+</script>
+
+</html>
