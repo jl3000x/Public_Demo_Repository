@@ -1,4 +1,4 @@
-#### PPHOLIC Travel Agency ####
+# PPHOLIC Travel Agency #
 
 This is the website as the demonstration server of ZhenHao Li.
 As a demo version of a travel agency website, it's implemented with following features:
@@ -16,13 +16,15 @@ For further detail of features and implementation, please refer the summary belo
 
 * [Website](http://travel.ppholic.tw)
 
-* [Website Introduction](http://travel.ppholic.tw/website-introdcution)
+* [Restful Client Website ](http://restful.travel.ppholic.tw/)
+
+* [Server Website Introduction](http://travel.ppholic.tw/website-introdcution)
 
 * [RESTful API Introduction](http://travel.ppholic.tw/rest-api-introdcution)
 
+---
 
-
-### Technical Background
+## Technical Background
 
 * [Language]    Java 8
 * [Project]     Spring Boot 2.4.5, Maven
@@ -33,9 +35,9 @@ For further detail of features and implementation, please refer the summary belo
 * [Aspect]      Aspect J
 * [Server]      AWS Elastic Beanstalk, RDS
 
+---
 
-
-### Implementation Features
+## Implementation Features
 
 * [Structure] Viewer <=> Controller <=> Service <=> DAO <=> Hibernate <=> MySQL on AWS RDS
 
@@ -49,9 +51,9 @@ For further detail of features and implementation, please refer the summary belo
 
 * [Table_Display_Sorting_Utility] Implemented by HQL sorting commend.
 
+---
 
-
-### Future Update Plan
+## Future Update Plan
 
 1. Product Comment Utility
 
@@ -59,7 +61,7 @@ For further detail of features and implementation, please refer the summary belo
 
 3. Client-Preference-Oriented Product Recommendation Algo
 
+---
 
-
-### DataBase Scheme
+## DataBase Scheme
 ![image](../ppholic_server_demo/src/main/resources/static/images/SQL_Scheme.png)
