@@ -62,7 +62,7 @@ For further detail of features and implementation, please refer the summary belo
 
 
 ### Website Map
-![image](../static/images/SQL_Scheme.png)
+![image](../ppholic_server_demo/src/main/resources/static/images/SQL_Scheme.png)
 
 
 
