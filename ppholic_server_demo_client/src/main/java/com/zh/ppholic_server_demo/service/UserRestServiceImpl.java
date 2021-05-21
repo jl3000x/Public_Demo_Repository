@@ -24,10 +24,10 @@ public class UserRestServiceImpl implements UserService{
     BCryptPasswordEncoder theBCryptPasswordEncoder;
 
     @Value("${psd.api.member.url}")
-    private static String MEMBER_API_URL;
+    private String MEMBER_API_URL;
 
     @Value("${psd.api.register.url}")
-    private static String REGISTER_API_URL;
+    private String REGISTER_API_URL;
 
     @Override
     public User getMember(String username, String token){

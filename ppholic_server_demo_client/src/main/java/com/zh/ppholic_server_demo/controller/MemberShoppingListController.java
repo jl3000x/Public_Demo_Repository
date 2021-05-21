@@ -35,7 +35,7 @@ public class MemberShoppingListController {
 	RestTemplate theRestTemplate;
 
     @Value("${psd.api.member.url}")
-    private static String MEMBER_API_URL;
+    private String MEMBER_API_URL;
 
     @GetMapping("/center")
     public String listShoppingList(HttpServletRequest request, Model theModel){
