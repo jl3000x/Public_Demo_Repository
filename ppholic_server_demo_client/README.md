@@ -26,12 +26,13 @@ For further detail of features and implementation, please refer the summary belo
 
 * [Language]    Java 8
 * [Project]     Spring Boot 2.4.5, Maven
+* [Server]      AWS Elastic Beanstalk, RDS
 * [Framework]   Spring MVC
 * [Database]    MySQL 8.0.23, Hibernate
 * [Viewer]      Thymeleaf, Bootstrap 5
 * [Security]    Spring Security, bcrypt, JWT
 * [Aspect]      Aspect J
-* [Server]      AWS Elastic Beanstalk, RDS
+* [Testing]     Junit 5, Mockito
 
 ---
 
