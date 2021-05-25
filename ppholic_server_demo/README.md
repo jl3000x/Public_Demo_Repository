@@ -11,6 +11,8 @@ As a demo version of a travel agency website, it's implemented with following fe
 
 4. RESTful API and Client Application: RESTful API design and client application implemented based on RESTful API.
 
+5. Cloud Platform Implementation: Main server application and database on AWS and Restful-API-based client application on Azure.
+
 
 For further detail of features and implementation, please refer the summary below and following detail.
 
@@ -28,9 +30,9 @@ For further detail of features and implementation, please refer the summary belo
 
 * [Language]    Java 8
 * [Project]     Spring Boot 2.4.5, Maven
-* [Server]      AWS Elastic Beanstalk, RDS
+* [Server]      AWS Elastic Beanstalk, Azure App Service
 * [Framework]   Spring MVC
-* [Database]    MySQL 8.0.23, Hibernate
+* [Database]    MySQL 8.0.23, Hibernate, AWS RDS
 * [Viewer]      Thymeleaf, Bootstrap 5
 * [Security]    Spring Security, bcrypt, JWT
 * [Aspect]      Aspect J
