@@ -39,7 +39,7 @@ For further detail of features and implementation, please refer the summary belo
 * [Language]    Java 8
 * [Project]     Spring Boot 2.4.5, Maven
 * [Server]      AWS Elastic Beanstalk, Azure App Service
-* [Framework]   Spring MVC
+* [Framework]   MVC by Spring Boot 2.4.5
 * [Database]    MySQL 8.0.23, Hibernate, AWS RDS
 * [Viewer]      Thymeleaf, Bootstrap 5
 * [Security]    Spring Security, bcrypt, JWT
